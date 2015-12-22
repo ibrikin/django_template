@@ -1,0 +1,37 @@
+web:
+  restart: always
+  build: ./app
+  expose:
+    - "8000"
+  links:
+    - postgres:postgres
+  volumes:
+    - /usr/src/app
+  env_file: .env
+
+nginx:
+  restart: always
+  build: .
+  ports:
+    - "80:80"
+  volumes:
+    - ./app:/opt/django/app
+  volumes_from:
+    - web
+  links:
+    - web:web
+
+postgres:
+  restart: always
+  image: postgres:latest
+  volumes_from:
+    - data
+  ports:
+    - "5432:5432"
+
+data:
+  restart: always
+  image: postgres:latest
+  volumes:
+    - /var/lib/postgresql
+  command: "true"

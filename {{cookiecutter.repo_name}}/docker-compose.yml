@@ -1,0 +1,46 @@
+web:
+  restart: always
+  build: .
+  links:
+    - postgres:postgres
+  env_file: .env
+  volumes:
+    - ./app:/opt/app
+    - ./nginx:/opt/nginx
+    - ./uwsgi:/opt/uwsgi
+    - /opt/run
+  ports:
+    - "80:80"
+    - "8000:8000"
+  
+postgres:
+  restart: always
+  image: postgres:latest
+  volumes_from:
+    - data
+  ports:
+    - "5431:5432"
+
+data:
+  restart: always
+  image: postgres:latest
+  volumes:
+    - /var/lib/postgresql
+  command: "true"
+
+############# MongoDB Containers ##############
+#mongo:
+#  restart: always
+#  image: mongo:latest
+#  volumes_from:
+#    - mongo_data
+#  ports:
+#    - "27017:27017"
+#
+#mongo_data:
+#  restart: always
+#  image: mongo:latest
+#  volumes:
+#    - /data/db
+#  command: "true"
+
