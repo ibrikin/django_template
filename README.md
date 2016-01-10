@@ -9,7 +9,7 @@
 
 В папке где будет проект выполнить:
 
-    $ cookiecutter http://virt88.aetp.nn/brikin.i/template_django.git
+    $ cookiecutter https://github.com/ibrikin/django_template.git
     
 ## Как работать с Docker
 
@@ -17,7 +17,7 @@
 
 1. Скопировать структуру проекта:
 
-    $ cookiecutter http://virt88.aetp.nn/brikin.i/template_django.git
+    $ cookiecutter https://github.com/ibrikin/django_template.git
     
 2. В файле `.env` задать имя проекта в `MODULE` (по умолчанию - project_name)
 
